@@ -1,14 +1,13 @@
-import { useEffect } from "react";
+import './style/tailwind.css';
 
 function App() {
-  useEffect(() => {
-    fetch("http://localhost:5000/api/exif")
-      .then(res => res.json())
-      .then(data => console.log("서버에서 받은 EXIF 데이터:", data))
-      .catch(console.error);
-  }, []);
-
-  return <h1>EXIF 데이터 콘솔 확인!</h1>;
+  return (
+    <div className="flex justify-center items-center h-screen bg-gray-200">
+      <h1 className="text-5xl font-bold text-blue-500">
+        Tailwind CSS 적용 완료! 🎉
+      </h1>
+    </div>
+  );
 }
 
 export default App;
