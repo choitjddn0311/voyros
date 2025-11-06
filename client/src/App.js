@@ -1,19 +1,14 @@
 import { useEffect } from "react";
-import React from "react";
 
-const App = () => {
+function App() {
   useEffect(() => {
-    fetch('http://localhost:5000/api')
+    fetch("http://localhost:5000/api/exif")
       .then(res => res.json())
-      .then(data => console.log(data.message))
-      .catch((err) => console.error(err));
-  },[]);
+      .then(data => console.log("서버에서 받은 EXIF 데이터:", data))
+      .catch(console.error);
+  }, []);
 
-  return (
-    <div>
-      <h1>프론트엔드 테스트 확인합니다</h1>
-    </div>
-  );
+  return <h1>EXIF 데이터 콘솔 확인!</h1>;
 }
 
 export default App;

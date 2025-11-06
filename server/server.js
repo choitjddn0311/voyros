@@ -1,16 +1,23 @@
 import express from "express";
 import cors from "cors";
+import exif from "fast-exif";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
 app.use(cors());
-app.use(express.json());
 
-const ports = 5000;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-app.get('/api' , (req,res) => {
-    res.json({message: "hello. 백엔드 테스트 중입니다."});
+app.get("/api/exif", async (req, res) => {
+  try {
+    const imagePath = path.join(__dirname, "assets/images/DSC00387.jpg");
+    const data = await exif.read(imagePath);
+    res.json({ message: "EXIF 읽기 성공", exif: data });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-app.listen(ports, () => {
-    console.log(`${ports}번 포트에서 백엔드 실행중입니다.`);
-});
+app.listen(5000, () => console.log("✅ Server running on http://localhost:5000"));
