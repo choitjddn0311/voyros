@@ -13,4 +13,4 @@ app.get('/testApi' , (req,res) => {
 
 app.listen(port , () => {
     console.log(`the server is running on ${port} port`)
-});
+}); 
