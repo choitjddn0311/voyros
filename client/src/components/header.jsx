@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import {Moblie, Tablet, Desktop} from "./responsive";
 import MainLogo from "../assets/imgs/logo/logo_350.png";
-import MoblieLogo from "../assets/imgs/logo/logo_250.png";
 
 const Util = styled.div`
     width: 100%;
@@ -44,13 +43,21 @@ const HeaderInner = styled.div`
     align-items: center;
 `;
 
-const LogoArea = styled.div`
+const Logo = styled.div`
     width: 350px;
     height: 75px;
 `;
 
-const MoblieLogoArea = styled.div`
+const MoblieLogo = styled.div`
     width: 200px;
+    
+    & img {
+        width: 100%;
+    }
+`;
+
+const TabletLogo = styled.div`
+    width: 250px;
     
     & img {
         width: 100%;
@@ -68,29 +75,41 @@ const Header = () => {
                 </Util>
                 <MainHeader>
                     <HeaderInner>
-                        <MoblieLogoArea>
+                        <MoblieLogo>
                             <Link to="/"><img src={MainLogo} alt=""  /></Link>
-                        </MoblieLogoArea>
+                        </MoblieLogo>
                     </HeaderInner>
                 </MainHeader>
             </Moblie>
             <Tablet>
-                <h1>테블릿 반응형입니다</h1>
+                <Util>
+                    <UtilInner>
+                        <li><Link to="/vid">로그인</Link></li>/
+                        <li><Link to="/vid">회원가입</Link></li>
+                    </UtilInner>
+                </Util>
+                <MainHeader>
+                    <HeaderInner>
+                        <TabletLogo>
+                            <Link to="/"><img src={MainLogo} alt="" /></Link>
+                        </TabletLogo>
+                    </HeaderInner>
+                </MainHeader>
             </Tablet>
             <Desktop>
                 <Util>
                     <UtilInner>
                         <Ul>
-                            <li><a href="#">로그인</a></li>
-                            <li><a href="#">회원가입</a></li>
+                            <li><Link to="/vid">로그인</Link></li>
+                            <li><Link to="/vid">회원가입</Link></li>
                         </Ul>
                     </UtilInner>
                 </Util>
                 <MainHeader>
                     <HeaderInner>
-                        <LogoArea>
+                        <Logo>
                             <Link to="/"><img src={MainLogo} alt="" /></Link>
-                        </LogoArea>
+                        </Logo>
                     </HeaderInner>
                 </MainHeader>
             </Desktop>
