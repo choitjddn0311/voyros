@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import MainLogo from "../assets/imgs/logo/logo_350.png";
+import {MoblieHeader, PcHeader} from "./responsive";
 
 const Util = styled.div`
     width: 100%;
@@ -42,22 +43,34 @@ const HeaderInner = styled.div`
     align-items: center;
 `;
 
+const LogoArea = styled.div`
+    width: 350px;
+    height: 75px;
+`;
+
 const Header = () => {
     return (
         <>
-            <Util>
-                <UtilInner>
-                    <Ul>
-                        <li><a href="#">로그인</a></li>
-                        <li><a href="#">회원가입</a></li>
-                    </Ul>
-                </UtilInner>
-            </Util>
-            <MainHeader>
-                <HeaderInner>
-                    <img src={MainLogo} alt="" />
-                </HeaderInner>
-            </MainHeader>
+            <PcHeader>
+                <Util>
+                    <UtilInner>
+                        <Ul>
+                            <li><a href="#">로그인</a></li>
+                            <li><a href="#">회원가입</a></li>
+                        </Ul>
+                    </UtilInner>
+                </Util>
+                <MainHeader>
+                    <HeaderInner>
+                        <LogoArea>
+                            <Link to="/"><img src={MainLogo} alt="" /></Link>
+                        </LogoArea>
+                    </HeaderInner>
+                </MainHeader>
+            </PcHeader>
+            <MoblieHeader>
+                <h1>responsive web test</h1>
+            </MoblieHeader>
         </>
     )
 }
