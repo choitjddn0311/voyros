@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import {Moblie, Tablet, Desktop} from "./responsive";
 import MainLogo from "../assets/imgs/logo/logo_350.png";
-import {MoblieHeader, PcHeader} from "./responsive";
+import MoblieLogo from "../assets/imgs/logo/logo_250.png";
 
 const Util = styled.div`
     width: 100%;
@@ -13,7 +14,7 @@ const Util = styled.div`
 `;
 
 const UtilInner = styled.div`
-    width: 1400px;
+    width: 80%;
     height: 100%;
     display: flex;
     justify-content: end;
@@ -36,7 +37,7 @@ const MainHeader = styled.header`
 `;
 
 const HeaderInner = styled.div`
-    width: 1400px;
+    width: 80%;
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -48,10 +49,35 @@ const LogoArea = styled.div`
     height: 75px;
 `;
 
+const MoblieLogoArea = styled.div`
+    width: 200px;
+    
+    & img {
+        width: 100%;
+    }
+`
+
 const Header = () => {
     return (
         <>
-            <PcHeader>
+            <Moblie>
+                <Util>
+                    <UtilInner>
+                        <li><Link to="/vid">로그인 / 회원가입</Link></li>
+                    </UtilInner>
+                </Util>
+                <MainHeader>
+                    <HeaderInner>
+                        <MoblieLogoArea>
+                            <Link to="/"><img src={MainLogo} alt=""  /></Link>
+                        </MoblieLogoArea>
+                    </HeaderInner>
+                </MainHeader>
+            </Moblie>
+            <Tablet>
+                <h1>테블릿 반응형입니다</h1>
+            </Tablet>
+            <Desktop>
                 <Util>
                     <UtilInner>
                         <Ul>
@@ -67,12 +93,7 @@ const Header = () => {
                         </LogoArea>
                     </HeaderInner>
                 </MainHeader>
-            </PcHeader>
-            <MoblieHeader>
-                <Util>
-
-                </Util>
-            </MoblieHeader>
+            </Desktop>
         </>
     )
 }
