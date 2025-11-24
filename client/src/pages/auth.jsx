@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import MainLogo from "../assets/imgs/logo/logo_350.png";
 
@@ -37,10 +37,30 @@ const AuthLogo = styled.div`
     align-items: center;
 `;
 
-const AuthTab = styled.div`
+const AuthTab = styled.ul`
     width: 100%;
     height: 50px;
     background: #efefef;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0 10px;
+    border-radius: 10px;
+    
+    .tabMenu {
+        width: 50%;
+        height: calc(100% - 20px);
+        background: transparent;
+        text-align: center;
+        align-content: center;
+        border-radius: 5px;
+    }
+    .focused {
+        background: #fff;
+    }
+    .tabMenu:hover {
+        cursor: pointer;
+    }
 `
 
 const AuthIntro = styled.div`
@@ -53,6 +73,17 @@ const AuthIntro = styled.div`
 `;
 
 const AuthPage = () => {
+    const [currentTab, isCurrentTab] = useState(0);
+
+    const menuArray = [
+        {name: "로그인", content: "로그인부분입니다"},
+        {name: "회원가입", content: "회원가입부분입니다"}
+    ];
+
+    const selectMenu = (i) => {
+        isCurrentTab(i);
+    }
+
     return (
         <>
             <MainContainer>
@@ -62,9 +93,11 @@ const AuthPage = () => {
                             <img src={MainLogo} alt=""/>
                         </AuthLogo>
                         <AuthTab>
-                            <div>로그인</div>
-                            <div>회원가입</div>
+                            {menuArray.map((el,i) => (
+                                <li className={i === currentTab ? "tabMenu focused" : "tabMenu" } onClick={() => selectMenu(i)}>{el.name}</li>
+                            ))}
                         </AuthTab>
+                        <p>{menuArray[currentTab].content}</p>
                     </AuthForm>
                 </FormContainer>
                 <AuthIntro />
