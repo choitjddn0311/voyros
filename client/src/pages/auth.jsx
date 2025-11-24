@@ -54,9 +54,11 @@ const AuthTab = styled.ul`
         text-align: center;
         align-content: center;
         border-radius: 5px;
+        transition: .2s;
     }
     .focused {
         background: #fff;
+        transition: .2s;
     }
     .tabMenu:hover {
         cursor: pointer;
