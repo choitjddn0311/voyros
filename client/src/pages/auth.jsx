@@ -21,12 +21,14 @@ const FormContainer = styled.div`
 
 const AuthForm = styled.form`
     width: 500px;
-    height: 650px;
+    // prop
+    height: ${(props) => props.formHeight || "650px"};
     background: #fefefe;
     box-shadow: 0 0 20px #eee,
                 0 0 40px #efefef;
     border-radius: 10px;
     padding: 15px;
+    transition: height .3s ease;
 `;
 
 const AuthLogo = styled.div`
@@ -63,7 +65,14 @@ const AuthTab = styled.ul`
     .tabMenu:hover {
         cursor: pointer;
     }
-`
+`;
+
+const AuthInputContainer = styled.div`
+    width: 100%;
+    transition: height .3s ease;
+    overflow-y: auto;
+    background: red;
+`;
 
 const AuthIntro = styled.div`
     width: 50%;
@@ -74,23 +83,36 @@ const AuthIntro = styled.div`
     background: #212121;
 `;
 
+const LoginForm = () => {
+
+}
+
+const SignupForm = () => {
+
+}
+
 const AuthPage = () => {
+    // 0과 1로 상태관리 (0: 로그인, 1: 회원가입)
     const [currentTab, isCurrentTab] = useState(0);
 
     const menuArray = [
-        {name: "로그인", content: "로그인부분입니다"},
-        {name: "회원가입", content: "회원가입부분입니다"}
+        // 미리 AuthForm높이 지정)
+        {name: "로그인", content: <LoginForm/>, formHeight: "500px"},
+        {name: "회원가입", content: <SignupForm/>, formHeight: "600px"}
     ];
 
     const selectMenu = (i) => {
         isCurrentTab(i);
     }
 
+    // currentTab이 0이면 500, 1이면 600
+    const currentFormTotalHeight = menuArray[currentTab].formHeight;
+
     return (
         <>
             <MainContainer>
                 <FormContainer>
-                    <AuthForm>
+                    <AuthForm formHeight={currentFormTotalHeight}>
                         <AuthLogo>
                             <img src={MainLogo} alt=""/>
                         </AuthLogo>
@@ -99,7 +121,9 @@ const AuthPage = () => {
                                 <li className={i === currentTab ? "tabMenu focused" : "tabMenu" } onClick={() => selectMenu(i)}>{el.name}</li>
                             ))}
                         </AuthTab>
-                        <p>{menuArray[currentTab].content}</p>
+                        <AuthInputContainer>
+                            <p>{menuArray[currentTab].content}</p>
+                        </AuthInputContainer>
                     </AuthForm>
                 </FormContainer>
                 <AuthIntro />
