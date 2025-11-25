@@ -3,6 +3,12 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import MainLogo from "../assets/imgs/logo/logo_350.png";
 
+const color1 = "344e41";
+const color2 = "3a5a40";
+const color3 = "588157";
+const color4 = "a3b18a";
+const color5 = "dad7cd";
+
 const MainContainer = styled.main`
     width: 100%;
     height: 100vh;
@@ -43,7 +49,8 @@ const AuthLogo = styled.div`
 const AuthTab = styled.ul`
     width: 100%;
     height: 50px;
-    background: #efefef;
+    background: #eee;
+    color: #111;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -91,7 +98,7 @@ const AuthInputContainer = styled.div`
     }
     
     & > p > a {
-        color: #aaa;
+        color: #588157;
     }
     & > p > a:hover {
         text-decoration: underline;
@@ -108,6 +115,7 @@ const LoginInput = styled.input`
     
     &[type="submit"]:hover {
         cursor: pointer;
+        background: #344e41;
     }
 `;
 
@@ -117,7 +125,7 @@ const AuthIntro = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #212121;
+    background: #588157;
 `;
 
 const LoginForm = () => {
@@ -128,7 +136,7 @@ const LoginForm = () => {
                 <LoginInput type="password" placeholder="비밀번호를 입력해주세요."/>
             </div>
             <p>비밀번호를 잊으셨나요? <Link to="/">비밀번호찾기</Link></p>
-            <LoginInput type="submit" value="로그인" style={{background: "#111", color: "#fff"}}/>
+            <LoginInput type="submit" value="로그인" style={{background: "#588157", color: "#fff"}}/>
         </>
     )
 }
