@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import styled from "styled-components";
+import {Link} from "react-router-dom";
 import MainLogo from "../assets/imgs/logo/logo_350.png";
 
 const MainContainer = styled.main`
@@ -71,7 +72,43 @@ const AuthInputContainer = styled.div`
     width: 100%;
     transition: height .3s ease;
     overflow-y: auto;
-    background: red;
+    //background: red;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    
+    & > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        gap: 20px;
+    }
+    
+    & > p {
+        color: #111;
+    }
+    
+    & > p > a {
+        color: #aaa;
+    }
+    & > p > a:hover {
+        text-decoration: underline;
+    }
+`;
+
+const LoginInput = styled.input`
+    width: 100%;
+    height: 50px;
+    border: 1px solid #aaa;
+    outline: none;
+    padding-left: 10px;
+    border-radius: 5px;
+    
+    &[type="submit"]:hover {
+        cursor: pointer;
+    }
 `;
 
 const AuthIntro = styled.div`
@@ -84,7 +121,16 @@ const AuthIntro = styled.div`
 `;
 
 const LoginForm = () => {
-
+    return (
+        <>
+            <div>
+                <LoginInput type="text" placeholder="아이디를 입력해주세요."/>
+                <LoginInput type="password" placeholder="비밀번호를 입력해주세요."/>
+            </div>
+            <p>비밀번호를 잊으셨나요? <Link to="/">비밀번호찾기</Link></p>
+            <LoginInput type="submit" value="로그인" style={{background: "#111", color: "#fff"}}/>
+        </>
+    )
 }
 
 const SignupForm = () => {
@@ -97,7 +143,7 @@ const AuthPage = () => {
 
     const menuArray = [
         // 미리 AuthForm높이 지정)
-        {name: "로그인", content: <LoginForm/>, formHeight: "500px"},
+        {name: "로그인", content: <LoginForm/>, formHeight: "440px"},
         {name: "회원가입", content: <SignupForm/>, formHeight: "600px"}
     ];
 
@@ -122,7 +168,7 @@ const AuthPage = () => {
                             ))}
                         </AuthTab>
                         <AuthInputContainer>
-                            <p>{menuArray[currentTab].content}</p>
+                            {menuArray[currentTab].content}
                         </AuthInputContainer>
                     </AuthForm>
                 </FormContainer>
