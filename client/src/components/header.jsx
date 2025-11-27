@@ -100,8 +100,8 @@ const Header = () => {
                 <Util>
                     <UtilInner>
                         <Ul>
-                            <li><Link to="/vid">로그인</Link></li>
-                            <li><Link to="/vid">회원가입</Link></li>
+                            <li><Link to="/vid?to=login">로그인</Link></li>
+                            <li><Link to="/vid?to=singup">회원가입</Link></li>
                         </Ul>
                     </UtilInner>
                 </Util>
