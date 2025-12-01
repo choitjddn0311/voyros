@@ -9,6 +9,11 @@ const uploadRoutes = require('./routes/upload');
 const mypageRoutes = require('./routes/mypage');
 const userRoutes = require('./routes/user');
 const deleteRoutes = require('./routes/postManage');
+const userManagementRoute = require('./routes/userManagement');
+const postManagementRoute = require('./routes/postManagement');
+const genderAmountRoute = require('./routes/getGenderAmount');
+const updateUserRoute = require('./routes/updateUserRole');
+
 
 const app = express();
 const PORT = 5000;
@@ -31,6 +36,10 @@ app.use('/api/upload' , uploadRoutes);
 app.use('/user' , mypageRoutes);
 app.use('/user/delete' , userRoutes);
 app.use('/manage', deleteRoutes);
+app.use('/admin' , userManagementRoute);
+app.use('/admin' , postManagementRoute);
+app.use('/admin' ,genderAmountRoute);
+app.use('/admin' , updateUserRoute);
 
 app.listen(PORT , '0.0.0.0', () => {
 });

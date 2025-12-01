@@ -14,6 +14,8 @@ import SideBar from "./components/sidebar";
 import UpdateLog from "./page/updateLog";
 import UserManagement from "./page/userManagement";
 import MainDashboard from "./page/mainDashboard";
+import PostManagement from "./page/postManageMent";
+import AdminLayout from "./components/adminLayout";
 
 // 라우터 내부에서 location 사용을 위해 컴포넌트 분리
 const AppContent = () => {
@@ -25,9 +27,6 @@ const AppContent = () => {
 
   return (
     <>
-      {/* 관리자 페이지일 때만 사이드바 노출 */}
-      {isAdminPage && <SideBar isOpen={isOpen} setIsOpen={setIsOpen} />}
-
       {/* 일반 페이지에서는 헤더 노출 */}
       {!isAdminPage && (
         <>
@@ -44,9 +43,13 @@ const AppContent = () => {
         <Route path="/mypage" element={<PermitRoute><Mypage /></PermitRoute>}></Route>
 
         {/* 관리자 페이지 */}
-        <Route path="/admin" element={<MainDashboard isOpen={isOpen}/>}></Route>
-        <Route path="/admin/userList" element={<UserManagement isOpen={isOpen}/>} ></Route>
-        <Route path="/admin/UpdateLog" element={<UpdateLog/>}></Route>
+        <Route path="/admin" element={<AdminLayout isOpen={isOpen} setIsOpen={setIsOpen} />}>
+          <Route index element={<MainDashboard isOpen={isOpen} />} />
+          <Route path="/admin/dashboard" element={<MainDashboard isOpen={isOpen}/>}></Route>
+          <Route path="/admin/userList" element={<UserManagement isOpen={isOpen}/>} ></Route>
+          <Route path="/admin/postList" element={<PostManagement isOpen={isOpen}/>} ></Route>
+          <Route path="/admin/UpdateLog" element={<UpdateLog/>}></Route>
+        </Route>
       </Routes>
 
       {/* 일반 페이지일 때만 푸터 노출 */}

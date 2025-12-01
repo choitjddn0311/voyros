@@ -89,7 +89,7 @@ const SideBar = ({isOpen, setIsOpen}) => {
                 </AsideToggle>
                 <AsideInner>
                     <AsideMenu isOpen={isOpen}>
-                        <Link to='/'><BiSolidDashboard /> <p>대시보드</p></Link>
+                        <Link to='/admin/dashboard'><BiSolidDashboard /> <p>대시보드</p></Link>
                     </AsideMenu>
                     <AsideMenu isOpen={isOpen}>
                         <Link to='/admin/userList'><FaUserPen /><p>회원 관리</p></Link>

@@ -5,7 +5,7 @@ import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 
 const Body = styled.div`
     padding: 10px;
-    width: ${(props) => (props.isOpen ? "calc(100% - 250px)" : "calc(100% - 100px)")};
+    width: 100%;
     height: 100vh;
     background: #eee;
     overflow-y: scroll;

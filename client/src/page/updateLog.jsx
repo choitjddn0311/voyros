@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Body = styled.div`
     padding: 10px;
-    width: calc(100% - 250px);
+    width: 100%;
     height: 100vh;
     background: #eee;
     overflow-y: scroll;

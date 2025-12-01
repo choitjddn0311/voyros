@@ -1,0 +1,24 @@
+{
+  "name": "404blog",
+  "version": "1.0.0",
+  "description": "- frontend\r   - react",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run start:client\" \"npm run start:server\"",
+    "start:client":"cd client && npm start",
+    "start:server":"cd server && npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/choitjddn0311/404blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/choitjddn0311/404blog/issues"
+  },
+  "homepage": "https://github.com/choitjddn0311/404blog#readme",
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
