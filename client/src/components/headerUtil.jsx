@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import Modal from "./modal"; // 모달 컴포넌트
@@ -268,6 +268,7 @@ const HeaderUtil = () => {
   const [userId, setUserId] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate();
 
   const {setUser} = useAuth();
 
@@ -359,7 +360,7 @@ const HeaderUtil = () => {
     localStorage.removeItem("user");
     showCustomAlert("로그아웃 되었습니다.");
     setTimeout(() => {
-      window.location.reload();
+      navigate("/");
     },100)
   };
 

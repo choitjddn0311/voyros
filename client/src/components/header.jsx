@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import LogoImg from "../assets/images/logo/logo.png";
+import LogoImg from "../assets/images/logo/logo_350.png";
 import { GoSearch } from "react-icons/go";
+import UserAlert from "./alert/userAlert";
 
 const containerSize = 1400;
 
@@ -27,8 +28,8 @@ const HeaderContainer = styled.div`
 `;
 
 const LogoContainer = styled.div`
-    height: 100%;
-    width: 100px;
+    height: 75px;
+    width: 350px;
 
     & img {
         width: 100%;
@@ -38,7 +39,7 @@ const LogoContainer = styled.div`
 `;
 
 const Nav = styled.nav`
-    width: 800px;
+    width: 900px;
     height: 100%;
 `;
 
@@ -69,7 +70,7 @@ const Gnb = styled.li`
 `;
 
 const SearchForm = styled.form`
-    width: 350px;
+    width: 250px;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -81,7 +82,7 @@ const SearchForm = styled.form`
         outline: none;
         border: none;
         border-bottom: 3px solid ${props => props.$hasValue ? '#111' : '#ddd'};
-        font-size: 20px;
+        font-size: 17px;
         caret-color: ${props => props.$hasValue ? '#111' : '#ddd'};
         color: #111;
         font-weight: 500;
@@ -107,9 +108,22 @@ const Header = () => {
     const location = useLocation();
     const currentPath = location.pathname;
     const [search, setSearch] = useState("");
+    const navigate = useNavigate();
+    const [showAlert,setShowAlert] = useState(false);
 
     const user = JSON.parse(localStorage.getItem("user"));
     const isAdmin = user?.role === "admin";
+
+    const handleProtectedCheck = (path) => {
+        const isLoggedIn = localStorage.getItem("isLoggedIn") == "true";
+
+        if(!isLoggedIn) {
+            setShowAlert(true);
+            return;
+        }
+
+        navigate(path);
+    };
 
     return (
         <MainHeader>
@@ -119,15 +133,46 @@ const Header = () => {
                 </LogoContainer>
                 <Nav>
                     <GnbContainer>
+                        {showAlert && (
+                          <UserAlert
+                            message="로그인이 필요한 서비스입니다."
+                            onClose={() => setShowAlert(false)}
+                          />
+                        )}
                         <Gnb $active={currentPath === "/"}>
                             <Link to="/">홈</Link>
                         </Gnb>
                         {/* 오류나면 여기바꿔 */}
                         <Gnb $active={currentPath === "/write"}>
-                            <Link to="/write">글쓰기</Link>
+                            <Link
+                                to="/write"
+                                onClick={(e) => {
+                                    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+                                    if(!isLoggedIn) {
+                                        e.preventDefault();
+                                        setShowAlert(true);
+                                    }
+                                }}
+                            >
+                                글쓰기
+                            </Link>
                         </Gnb>
                         <Gnb $active={currentPath === "/intro"}>
                             <Link to="/intro">소개</Link>
+                        </Gnb>
+                        <Gnb $active={currentPath === "/profile"}>
+                            <Link
+                                to="/profile"
+                                onClick={(e) => {
+                                    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+                                    if(!isLoggedIn) {
+                                        e.preventDefault();
+                                        setShowAlert(true);
+                                    }
+                                }}
+                            >
+                                프로필
+                            </Link>
                         </Gnb>
 
                         {isAdmin && (
@@ -139,7 +184,7 @@ const Header = () => {
                             <SearchForm $hasValue={search !== ""}>
                                 <input
                                     type="text"
-                                    placeholder="검색할 내용을 입력하세요.."
+                                    placeholder="내용을 입력하세요."
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
                                 />

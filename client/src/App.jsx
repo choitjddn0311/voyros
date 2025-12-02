@@ -1,21 +1,24 @@
 import React, {useState} from "react";
 import {BrowserRouter, Routes, Route, useLocation} from 'react-router-dom';
+
+import GlobalStyle from "./style/globalStyle";
+
 import HeaderUtil from "./components/headerUtil";
 import Header from "./components/header";  
+import Footer from "./components/footer";
+import AdminLayout from "./components/adminLayout";
+
 import Home from "./page/home";
 import Post from "./page/post";
 import Intro from "./page/intro";
 import Mypage from "./page/myPage";
-import Footer from "./components/footer";
-import GlobalStyle from "./style/globalStyle";
+import Profile from "./page/profile";
 import PermitRoute from "./page/permit";
 import PostShow from "./page/postShow";
-import SideBar from "./components/sidebar";
 import UpdateLog from "./page/updateLog";
 import UserManagement from "./page/userManagement";
 import MainDashboard from "./page/mainDashboard";
 import PostManagement from "./page/postManageMent";
-import AdminLayout from "./components/adminLayout";
 
 // 라우터 내부에서 location 사용을 위해 컴포넌트 분리
 const AppContent = () => {
@@ -41,6 +44,7 @@ const AppContent = () => {
         <Route path="/post/:title" element={<PostShow/>}></Route>
         <Route path="/intro" element={<Intro />}></Route>
         <Route path="/mypage" element={<PermitRoute><Mypage /></PermitRoute>}></Route>
+        <Route path="/profile" element={<PermitRoute><Profile/></PermitRoute>}></Route>
 
         {/* 관리자 페이지 */}
         <Route path="/admin" element={<AdminLayout isOpen={isOpen} setIsOpen={setIsOpen} />}>

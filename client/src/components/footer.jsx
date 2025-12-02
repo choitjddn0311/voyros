@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Logo from "../assets/images/logo/footerLogo.png"
+import Logo from "../assets/images/logo/logo_200.png"
 import { FaInstagram } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { RiKakaoTalkFill } from "react-icons/ri";
@@ -47,18 +47,21 @@ const InnerLeft = styled.div`
 
 const InnerLeftTop = styled.div`
     width: 100%;
-    height: 100px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 `
 
 const FooterLogo = styled.div`
     width: 100%;
-    height: 50px;
+    height: 75px;
     display: flex;
-    align-items: start;
+    align-items: center;
 
     & > img {
         width: 200px;
-        height: 100%;
+        height: 75px;
         filter: brightness(0);
     };
 `;

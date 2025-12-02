@@ -144,12 +144,13 @@ const GenderInner = styled.div`
     gap: 10px;
 `;
 
-const QuitUserContainer = styled.div`
+const UserManageContainer = styled.div`
     width: 100%;
     height: 100px;
     display: flex;
     justify-content: end;
     align-items: center;
+    gap: 15px;
 `;
 
 const QuitButton = styled.button`
@@ -163,6 +164,21 @@ const QuitButton = styled.button`
 
     &:hover {
         background: red;
+        color: #fff;
+    }
+`;
+
+const UpdateButton = styled.button`
+    width: 200px;
+    height: 50%;
+    background: #fff;
+    color: #111;
+    border: 1px solid #111;
+    outline: none;
+    border-radius: 10px;
+
+    &:hover {
+        background: #111;
         color: #fff;
     }
 `
@@ -298,9 +314,10 @@ const Mypage = () => {
                                     </InputInner>
                                 </InputArea>
                             </Inner>
-                            <QuitUserContainer>
+                            <UserManageContainer>
+                                <UpdateButton>수정사항 저장</UpdateButton>
                                 <QuitButton onClick={handleQuit}>회원 탈퇴</QuitButton>
-                            </QuitUserContainer>
+                            </UserManageContainer>
                         </>
                     ) : (
                         <p>오류가 발생했습니다.</p>
