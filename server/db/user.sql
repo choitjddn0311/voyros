@@ -15,3 +15,11 @@ CREATE TABLE user (
     role ENUM('user', 'admin') NOT NULL DEFAULT 'user',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+
+ALTER TABLE user
+ADD COLUMN follower_count INT NOT NULL DEFAULT 0,
+ADD COLUMN following_count INT NOT NULL DEFAULT 0;
+
+팔로우 또는 팔로잉 발생시 count += 1;
+언팔로우 또는 언팔로잉 발생시 count -= 1;
