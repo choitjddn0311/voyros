@@ -16,7 +16,7 @@ const Container = styled.div`
     width: ${containerSize}px;
 `;
 
-const UserContainer = styled.div`
+const ProfileContainer = styled.div`
     width: 100%;
     height: 300px;
     display: flex;
@@ -114,6 +114,64 @@ const FollowBtn = styled.button`
     }
 `;
 
+const UserListContainer = styled.div`
+    width: 100%;
+    border-top: 1px solid #aaa;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    & > h1 {
+        width: 100%;
+        height: 50px;
+        align-content: center;
+    }
+`;
+
+const UserListInner = styled.ul`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 20px;
+    align-items: start;
+`;
+
+const UserList = styled.li`
+    width: 100%;
+    height: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .userId {
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .userListBtnContainer {
+        width: 250px;
+        display: flex;
+        justify-content: end;
+        gap: 10px;
+    }
+`;
+
+const UserListBtn = styled.button`
+    width: 100px;
+    height: 40px;
+    background: #555;
+    color: #fff;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    
+    &:hover {
+        background: #111;
+    }
+`
+
 // 로딩과 에러 컴포넌트 추가할 것
 const Loading = styled.p`
   text-align: center;
@@ -134,6 +192,7 @@ const Profile = () => {
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error,setError] = useState(null);
+    const [users, setUsers] = useState([]);
     useEffect(() => {
         if(!id) {
             setError("사용자가 없습니다.");
@@ -161,6 +220,19 @@ const Profile = () => {
         fetchProfile();
     }, [id]);
 
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const res = await fetch(`${process.env.REACT_APP_API_URL}/admin/userList`);
+                const data = await res.json();
+                setUsers(data);
+            } catch(err) {
+                console.error(err)
+            }
+        }
+        fetchUsers();
+    },[])
+
     if (loading) return <Loading>프로필 로딩 중...</Loading>;
     if (error) return <Error>{error}</Error>;
     if (!profile) return <Error>프로필 데이터가 비어 있습니다.</Error>;
@@ -169,7 +241,7 @@ const Profile = () => {
         <>
             <Main>
                 <Container>
-                    <UserContainer>
+                    <ProfileContainer>
                         <UserProfile>
                             <div>{profile.name}</div>
                         </UserProfile>
@@ -193,7 +265,28 @@ const Profile = () => {
                                 </FollowBtnContainer>
                             </UserFollowContainer>
                         </UserInfo>
-                    </UserContainer>
+                    </ProfileContainer>
+                    <UserListContainer>
+                        <h1>추천하는 여행자</h1>
+                        <UserListInner>
+                            {users.map(user => {
+                                if(user.id !== 'admin' && user.id !== localStorage.getItem("userId")) {
+                                    return (
+                                        <UserList>
+                                            <div className="userInfo">
+                                                <div className="userId">{user.id}</div>
+                                                <div>{user.name}</div>
+                                            </div>
+                                            <div className="userListBtnContainer">
+                                                <UserListBtn><Link to={`/profile/${user.id}`}>프로필 방문</Link></UserListBtn>
+                                                <UserListBtn>팔로우</UserListBtn>
+                                            </div>
+                                        </UserList>
+                                    )
+                                }
+                            })}
+                        </UserListInner>
+                    </UserListContainer>
                 </Container>
             </Main>
         </>
