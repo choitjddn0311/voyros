@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {BrowserRouter, Routes, Route, useLocation} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, useLocation, Navigate} from 'react-router-dom';
 
 import GlobalStyle from "./style/globalStyle";
 
@@ -20,6 +20,14 @@ import UserManagement from "./page/userManagement";
 import MainDashboard from "./page/mainDashboard";
 import PostManagement from "./page/postManageMent";
 
+const RedirectToMyProfile = () => {
+  const userId = localStorage.getItem("userId");
+  if(!userId) {
+    return <Navigate to="login" replace/>;
+  }
+  return <Navigate to={`/profile/${userId}`} replace/>
+}
+
 // 라우터 내부에서 location 사용을 위해 컴포넌트 분리
 const AppContent = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -27,6 +35,7 @@ const AppContent = () => {
 
   // /admin으로 시작하는지 체크
   const isAdminPage = location.pathname.startsWith("/admin");
+  const hideFooter = location.pathname.startsWith("/profile");
 
   return (
     <>
@@ -44,7 +53,8 @@ const AppContent = () => {
         <Route path="/post/:title" element={<PostShow/>}></Route>
         <Route path="/intro" element={<Intro />}></Route>
         <Route path="/mypage" element={<PermitRoute><Mypage /></PermitRoute>}></Route>
-        <Route path="/profile" element={<PermitRoute><Profile/></PermitRoute>}></Route>
+        <Route path="/profile" element={<RedirectToMyProfile/>}></Route>
+        <Route path="/profile/:id" element={<Profile/>}></Route>
 
         {/* 관리자 페이지 */}
         <Route path="/admin" element={<AdminLayout isOpen={isOpen} setIsOpen={setIsOpen} />}>
@@ -57,7 +67,7 @@ const AppContent = () => {
       </Routes>
 
       {/* 일반 페이지일 때만 푸터 노출 */}
-      {!isAdminPage && <Footer />}
+      {!isAdminPage && !hideFooter && <Footer />}
     </>
   );
 };

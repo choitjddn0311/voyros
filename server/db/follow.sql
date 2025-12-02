@@ -8,7 +8,7 @@ CREATE TABLE follow (
 );
 
 -- 팔로우 또는 팔로잉 하기
-INSERT INTO follow (follower_idx, following_idx) VALUES (?, ?);
+INSERT INTO follow (follower_idx, following_idx) VALUES (3, 1);
 
 -- 언팔로우 또는 언팔로잉 하기
 DELETE FROM follow WHERE follower_idx = ? AND following_idx = ?;

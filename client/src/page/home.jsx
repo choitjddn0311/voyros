@@ -140,7 +140,7 @@ const Home = () => {
                         <h2><GoDiscussionOutdated /> 최신</h2>
                     </TabItem>
                     {/*  뜻 친구 */}
-                    <TabItem><h2><FaUserFriends />  사공 글</h2></TabItem>
+                    <TabItem><h2><FaUserFriends />  팔로워 글</h2></TabItem>
                     <TabItem
                         onClick={() => handleTabClick("mine")}
                         active={selectedTab === "mine"}

@@ -160,7 +160,7 @@ const Header = () => {
                         <Gnb $active={currentPath === "/intro"}>
                             <Link to="/intro">소개</Link>
                         </Gnb>
-                        <Gnb $active={currentPath === "/profile"}>
+                        <Gnb $active={currentPath.startsWith("/profile")}>
                             <Link
                                 to="/profile"
                                 onClick={(e) => {

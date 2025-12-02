@@ -13,6 +13,7 @@ const userManagementRoute = require('./routes/userManagement');
 const postManagementRoute = require('./routes/postManagement');
 const genderAmountRoute = require('./routes/getGenderAmount');
 const updateUserRoute = require('./routes/updateUserRole');
+const profileUser = require('./routes/profile');
 
 
 const app = express();
@@ -35,6 +36,7 @@ app.use('/api/posts' , postRoutes);
 app.use('/api/upload' , uploadRoutes);
 app.use('/user' , mypageRoutes);
 app.use('/user/delete' , userRoutes);
+app.use('/api/profile', profileUser);
 app.use('/manage', deleteRoutes);
 app.use('/admin' , userManagementRoute);
 app.use('/admin' , postManagementRoute);

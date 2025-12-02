@@ -8,10 +8,14 @@ const Body = styled.div`
     height: 100vh;
     background: #eee;
     overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 `;
 
 const Table = styled.table`
-    width: 100%;
+    width: 80%;
     border-collapse: collapse;
     background: #fff;
 `;
@@ -65,6 +69,10 @@ const PostManagement = ({isOpen}) => {
                 <Table>
                     <thead>
                         <tr>
+                            <Th><input 
+                                    type="checkbox"
+                                />
+                            </Th>
                             <Th>게시글 관리 번호</Th>
                             <Th>작성자</Th>
                             <Th>제목</Th>
@@ -75,6 +83,7 @@ const PostManagement = ({isOpen}) => {
                     <tbody>
                         {posts.map(post => (
                             <tr key={post.idx} onClick={detailPost}>
+                                <Td><input type="checkbox"/></Td>
                                 <Td>{post.idx}</Td>
                                 <Td>{post.id}</Td>
                                 <Td>{post.title}</Td>

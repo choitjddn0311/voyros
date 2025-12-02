@@ -16,7 +16,7 @@ const Body = styled.div`
 `;
 
 const Table = styled.table`
-    width: 100%;
+    width: 80%;
     border-collapse: collapse;
     background: #fff;
 `;

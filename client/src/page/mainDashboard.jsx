@@ -132,7 +132,7 @@ import styled from "styled-components";
 const MainDashBoard = () => {
   return (
     <>
-      <h1>대시보드 실패</h1>
+      <h1>매일 가입자 수, 게시물 수, 성비, 나이 등을 표시하는 차트</h1>
     </>
   ) 
 }
